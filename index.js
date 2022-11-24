@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const Campground = require('./models/campground');
 
 const DATABASE_NAME = 'yelpcamp';
 mongoose.connect(`mongodb://localhost:27017/${DATABASE_NAME}`)
