@@ -3,12 +3,17 @@ const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 
+function logError(error) {
+  console.log('Something went wrong...',);
+  console.log(error);
+}
+
 const DATABASE_NAME = 'yelpcamp';
 mongoose.connect(`mongodb://localhost:27017/${DATABASE_NAME}`)
-  .catch((error) => console.log(error));
+  .catch(error => logError(error));
 
 const connection = mongoose.connection;
-connection.on('error', error => console.error(error));
+connection.on('error', error => logError(error));
 connection.on('open', () => console.log(`Connected to ${DATABASE_NAME} database.`));
 connection.on('disconnected', () => console.log(`Disconnected from ${DATABASE_NAME} database.`));
 
