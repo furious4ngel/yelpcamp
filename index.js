@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
+const { response } = require('express');
 
 function logError(error) {
   console.log('Something went wrong...');
@@ -32,6 +33,13 @@ app.get('/campgrounds', async (request, response) => {
 
 app.get('/campgrounds/new', (request, response) => {
   response.render('campground/new');
+});
+
+app.post('/campgrounds', async (request, response) => {
+  const schema = request.body;
+  const camp = new Campground(schema);
+  await camp.save();
+  response.redirect(`/campgrounds/${camp.id}`);
 });
 
 app.get('/campgrounds/:id', async (request, response) => {
