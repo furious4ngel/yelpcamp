@@ -20,6 +20,7 @@ connection.on('disconnected', () => console.log(`Disconnected from ${DATABASE_NA
 const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
@@ -39,4 +40,15 @@ app.get('/campgrounds/:id/edit', async (request, response) => {
   const { id } = request.params;
   const camp = await Campground.findById(id);
   response.render('campground/edit', { camp });
+});
+
+app.post('/campgrounds/:id', async (request, response) => {
+  const { id } = request.params;
+  const camp = request.body;
+  await Campground.findByIdAndUpdate(
+    id,
+    camp,
+    { new: true, runValidators: true }
+  );
+  response.redirect(`/campgrounds/${id}`);
 });
