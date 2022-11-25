@@ -11,10 +11,9 @@
     <ul>
       <% for (const camp of campgrounds) { %>
         <li>
-          <p><%= camp.title %></p>
-          <p><%= camp.location %></p>
-          <p>$<%= camp.price %></p>
-          <p><%= camp.description %></p>
+          <a href="/campgrounds/<%= camp.id %>">
+            <p><%= camp.title %></p>
+          </a>
         </li>
       <% } %>
     </ul>
