@@ -36,8 +36,8 @@ app.get('/campgrounds/new', (request, response) => {
 });
 
 app.post('/campgrounds', async (request, response) => {
-  const schema = request.body;
-  const camp = new Campground(schema);
+  const { campground } = request.body;
+  const camp = new Campground(campground);
   await camp.save();
   response.redirect(`/campgrounds/${camp.id}`);
 });
@@ -56,10 +56,10 @@ app.get('/campgrounds/:id/edit', async (request, response) => {
 
 app.post('/campgrounds/:id', async (request, response) => {
   const { id } = request.params;
-  const camp = request.body;
+  const { campground } = request.body;
   await Campground.findByIdAndUpdate(
     id,
-    camp,
+    campground,
     { new: true, runValidators: true }
   );
   response.redirect(`/campgrounds/${id}`);
