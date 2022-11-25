@@ -30,6 +30,10 @@ app.get('/campgrounds', async (request, response) => {
   response.render('campground/index', { camps });
 });
 
+app.get('/campgrounds/new', (request, response) => {
+  response.render('campground/new');
+});
+
 app.get('/campgrounds/:id', async (request, response) => {
   const { id } = request.params;
   const camp = await Campground.findById(id);
