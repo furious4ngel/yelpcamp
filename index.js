@@ -65,3 +65,10 @@ app.patch('/campgrounds/:id', async (request, response) => {
   );
   response.redirect(`/campgrounds/${id}`);
 });
+
+app.delete('/campgrounds/:id', async (request, response) => {
+  const { id } = request.params;
+  const camp = await Campground.findById(id);
+  await Campground.remove(camp);
+  response.redirect('/campgrounds');
+});
