@@ -4,7 +4,7 @@ const cities = require('./cities');
 const campNames = require('./campgrounds');
 
 function logError(error) {
-  console.log('Something went wrong...',);
+  console.log('Something went wrong...');
   console.log(error);
 }
 

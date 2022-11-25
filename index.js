@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 
 function logError(error) {
-  console.log('Something went wrong...',);
+  console.log('Something went wrong...');
   console.log(error);
 }
 
