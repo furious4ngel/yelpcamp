@@ -24,6 +24,7 @@ app.set('view engine', 'ejs');
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
 
-app.get('/', (request, response) => {
-  response.send('YELPCAMP HOME');
+app.get('/campgrounds', async (request, response) => {
+  const campgrounds = await Campground.find({});
+  response.render('campground/index', { campgrounds });
 });
