@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
-const { response } = require('express');
+const methodOverride = require('method-override');
 
 function logError(error) {
   console.log('Something went wrong...');
@@ -22,6 +22,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
@@ -54,7 +55,7 @@ app.get('/campgrounds/:id/edit', async (request, response) => {
   response.render('campground/edit', { camp });
 });
 
-app.post('/campgrounds/:id', async (request, response) => {
+app.patch('/campgrounds/:id', async (request, response) => {
   const { id } = request.params;
   const { campground } = request.body;
   await Campground.findByIdAndUpdate(
