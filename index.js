@@ -25,8 +25,8 @@ const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
 
 app.get('/campgrounds', async (request, response) => {
-  const campgrounds = await Campground.find({});
-  response.render('campground/index', { campgrounds });
+  const camps = await Campground.find({});
+  response.render('campground/index', { camps });
 });
 
 app.get('/campgrounds/:id', async (request, response) => {
