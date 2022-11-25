@@ -34,3 +34,9 @@ app.get('/campgrounds/:id', async (request, response) => {
   const camp = await Campground.findById(id);
   response.render('campground/show', { camp });
 });
+
+app.get('/campgrounds/:id/edit', async (request, response) => {
+  const { id } = request.params;
+  const camp = await Campground.findById(id);
+  response.render('campground/edit', { camp });
+});
