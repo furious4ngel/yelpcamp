@@ -68,7 +68,7 @@ app.patch('/campgrounds/:id', async (request, response) => {
 
 app.delete('/campgrounds/:id', async (request, response) => {
   const { id } = request.params;
-  const camp = await Campground.findById(id);
-  await Campground.remove(camp);
+  const camp = await Campground.findById({ _id: id });
+  await Campground.deleteOne({ _id: camp._id });
   response.redirect('/campgrounds');
 });
