@@ -41,7 +41,8 @@ async function seedDatabase() {
           title: `${DESCRIPTOR} ${PLACE}`,
           location: `${location.city}, ${location.state}`,
           price: PRICE,
-          description: `Welcome to ${DESCRIPTOR} ${PLACE}. Located in ${location.city}, ${location.state}, it costs $${PRICE}/night.`
+          description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque fugit cumque voluptates quibusdam accusantium explicabo!',
+          image: 'https://images.unsplash.com/photo-1526491109672-74740652b963?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
         })
       );
     }
