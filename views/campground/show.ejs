@@ -16,9 +16,9 @@
       </li>
     </ul>
     <p>
-      <a href="/campgrounds/<%= camp.id %>/edit">Edit campground</a>
+      <a href="/campgrounds/<%= camp._id %>/edit">Edit campground</a>
     </p>
-    <form action="/campgrounds/<%= camp.id %>?_method=DELETE" method="post">
+    <form action="/campgrounds/<%= camp._id %>?_method=DELETE" method="post">
       <button>Delete</button>
     </form>
     <p>
