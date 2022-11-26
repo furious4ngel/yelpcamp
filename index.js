@@ -24,9 +24,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
-
 app.get('/campgrounds', async (request, response) => {
   const camps = await Campground.find({});
   response.render('campground/index', { camps });
@@ -72,3 +69,6 @@ app.delete('/campgrounds/:id', async (request, response) => {
   await Campground.deleteOne({ _id: camp._id });
   response.redirect('/campgrounds');
 });
+
+const PORT = 3000;
+app.listen(PORT, () => console.log(`Listening at port ${PORT}...`));
