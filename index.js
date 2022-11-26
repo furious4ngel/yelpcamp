@@ -1,4 +1,5 @@
 const express = require('express');
+const ejsMate = require('ejs-mate');
 const path = require('path');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
@@ -19,6 +20,7 @@ connection.on('open', () => console.log(`Connected to ${DATABASE_NAME} database.
 connection.on('disconnected', () => console.log(`Disconnected from ${DATABASE_NAME} database.`));
 
 const app = express();
+app.engine('ejs', ejsMate);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -26,11 +28,17 @@ app.use(methodOverride('_method'));
 
 app.get('/campgrounds', async (request, response) => {
   const camps = await Campground.find({});
-  response.render('campground/index', { camps });
+  response.render(
+    'campground/index',
+    { camps, title: 'Campgrounds - YelpCamp' }
+  );
 });
 
 app.get('/campgrounds/new', (request, response) => {
-  response.render('campground/new');
+  response.render(
+    'campground/new',
+    { title: 'Add Campground - YelpCamp' }
+  );
 });
 
 app.post('/campgrounds', async (request, response) => {
@@ -43,13 +51,17 @@ app.post('/campgrounds', async (request, response) => {
 app.get('/campgrounds/:id', async (request, response) => {
   const { id } = request.params;
   const camp = await Campground.findById(id);
-  response.render('campground/show', { camp });
+  response.render(
+    'campground/show',
+    { camp, title: `${camp.title} - YelpCamp` });
 });
 
 app.get('/campgrounds/:id/edit', async (request, response) => {
   const { id } = request.params;
   const camp = await Campground.findById(id);
-  response.render('campground/edit', { camp });
+  response.render(
+    'campground/edit',
+    { camp, title: 'Edit Campground Details - YelpCamp' });
 });
 
 app.patch('/campgrounds/:id', async (request, response) => {
